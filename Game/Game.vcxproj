@@ -79,6 +79,7 @@
     <ClCompile Include="Game_animation.cpp" />
     <ClCompile Include="Game_events.cpp" />
     <ClCompile Include="Game_physics.cpp" />
+    <ClCompile Include="Game_player.cpp" />
     <ClCompile Include="Game_render_routine.cpp" />
     <ClCompile Include="Game_main.cpp" />
     <ClCompile Include="Game_init.cpp" />
@@ -91,6 +92,7 @@
     <ClInclude Include="BBlock.h" />
     <ClInclude Include="Game_animation.h" />
     <ClInclude Include="Game_refs.h" />
+    <ClInclude Include="Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

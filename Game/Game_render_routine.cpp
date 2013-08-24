@@ -1,23 +1,25 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "Game_refs.h"
 
+float CAMERA_SHIFT_X = 0;
+float CAMERA_SHIFT_Y = 0;
 
 void draw(	GLuint texture, 
 			float x, float y, 
 			float w, float h, 
 			float r, 
 			float dx,float dy ) {
-	glBindTexture ( GL_TEXTURE_2D, texture );
+	glBindTexture	( GL_TEXTURE_2D, texture );
 	GLfloat _z = 0.0f;
-	glPushMatrix();
-	glTranslatef(x, y, 0);
-	glRotatef(r, 0, 0, 1);
-	glTranslatef(-x, -y, 0);
-    glBegin( GL_QUADS );			
-		glTexCoord2f(0   ,0   );	glVertex3f( x - dx		, y - dy		, _z);
-		glTexCoord2f(1.0f,0   );	glVertex3f( x - dx + w	, y - dy		, _z);
-		glTexCoord2f(1.0f,1.0f);	glVertex3f( x - dx + w	, y - dy + h	, _z);
-		glTexCoord2f(0,   1.0f);	glVertex3f( x - dx		, y - dy + h	, _z);
+	glPushMatrix	();
+	glTranslatef	( x, y, 0);
+	glRotatef		( r/M_PI*180.0, 0, 0, 1 );
+	glTranslatef	(-x,-y, 0);
+    glBegin			( GL_QUADS );
+		glTexCoord2f(0   ,0   );	glVertex3f( - CAMERA_SHIFT_X + x - dx		, - CAMERA_SHIFT_Y + y - dy		, _z);
+		glTexCoord2f(1.0f,0   );	glVertex3f( - CAMERA_SHIFT_X + x - dx + w	, - CAMERA_SHIFT_Y + y - dy		, _z);
+		glTexCoord2f(1.0f,1.0f);	glVertex3f( - CAMERA_SHIFT_X + x - dx + w	, - CAMERA_SHIFT_Y + y - dy + h	, _z);
+		glTexCoord2f(0,   1.0f);	glVertex3f( - CAMERA_SHIFT_X + x - dx		, - CAMERA_SHIFT_Y + y - dy + h	, _z);
     glEnd();
 	glPopMatrix();
 }

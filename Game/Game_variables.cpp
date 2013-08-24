@@ -11,9 +11,11 @@
 
 	// gameplay vars
 
+	Player*		player;
 	std::vector < BBlock* > blocks;
 
 	// graphics
 
 	BAnimation*	playerStand;
 	GLuint		blockTexture;
+	GLuint		manTexture;

@@ -3,8 +3,11 @@
 
 void loadData() {
 	blockTexture = loadTexture ( "images/block.png", GL_RGB );
+	manTexture   = loadTexture ( "images/man.png", GL_RGBA );
 	
 	loadMap("1.map");
+	player = new Player(100.0f, 200.0f);
+
 }
 
 void loadMap( char * fileName ){
@@ -16,6 +19,7 @@ void loadMap( char * fileName ){
 	int map[1000] = {0};
 	Uint i;
 	int result = 0;
+
 	for ( i = 0; ( result != EOF ) && (i < 1000); i++ ) {
 		result = fscanf( file, "%i, ", &(map[i]));
 	}
