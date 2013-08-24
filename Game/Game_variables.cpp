@@ -13,3 +13,7 @@
 
 	std::vector < BBlock* > blocks;
 
+	// graphics
+
+	BAnimation*	playerStand;
+	GLuint		blockTexture;

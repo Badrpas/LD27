@@ -83,7 +83,7 @@
     <ClCompile Include="Game_main.cpp" />
     <ClCompile Include="Game_init.cpp" />
     <ClCompile Include="Game_render.cpp" />
-    <ClCompile Include="Game_routine.cpp" />
+    <ClCompile Include="Game_load.cpp" />
     <ClCompile Include="Game_update.cpp" />
     <ClCompile Include="Game_variables.cpp" />
   </ItemGroup>

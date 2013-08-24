@@ -53,9 +53,9 @@ GLuint convToGLTex (SDL_Surface * surface,
 }
 
 GLuint loadTexture (char * file,
-					GLint glFormat = GL_RGBA, 
-					GLint filter   = GL_LINEAR, 
-					GLint wrapping = GL_CLAMP) {
+					GLint glFormat , 
+					GLint filter   , 
+					GLint wrapping ) {
 	GLuint texture = 0;
 	SDL_Surface *surface;
 	surface = load_image ( file );
