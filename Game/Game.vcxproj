@@ -54,6 +54,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>../libs/box2d.lib;../libs/SDL.lib;../libs/*.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -74,6 +75,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BBlock.cpp" />
+    <ClCompile Include="Game_animation.cpp" />
+    <ClCompile Include="Game_events.cpp" />
+    <ClCompile Include="Game_physics.cpp" />
+    <ClCompile Include="Game_render_routine.cpp" />
+    <ClCompile Include="Game_main.cpp" />
+    <ClCompile Include="Game_init.cpp" />
+    <ClCompile Include="Game_render.cpp" />
+    <ClCompile Include="Game_routine.cpp" />
+    <ClCompile Include="Game_update.cpp" />
+    <ClCompile Include="Game_variables.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BBlock.h" />
+    <ClInclude Include="Game_animation.h" />
+    <ClInclude Include="Game_refs.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
