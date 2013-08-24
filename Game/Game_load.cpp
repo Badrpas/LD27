@@ -6,7 +6,7 @@ void loadData() {
 	manTexture   = loadTexture ( "images/man.png", GL_RGBA );
 	
 	loadMap("1.map");
-	player = new Player(100.0f, 200.0f);
+	player = new Player(100.0f, 100.0f);
 
 }
 
@@ -16,7 +16,7 @@ void loadMap( char * fileName ){
 	strcpy ( path, "maps/" );
 	strcat ( path, fileName );
 	file = fopen( path, "r" );
-	int map[1000] = {0};
+	int map[1000] = { 0 };
 	Uint i;
 	int result = 0;
 
