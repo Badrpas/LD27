@@ -80,6 +80,7 @@
     <ClCompile Include="Game_events.cpp" />
     <ClCompile Include="Game_physics.cpp" />
     <ClCompile Include="Game_player.cpp" />
+    <ClCompile Include="Game_point.cpp" />
     <ClCompile Include="Game_render_routine.cpp" />
     <ClCompile Include="Game_main.cpp" />
     <ClCompile Include="Game_init.cpp" />
@@ -87,11 +88,14 @@
     <ClCompile Include="Game_load.cpp" />
     <ClCompile Include="Game_update.cpp" />
     <ClCompile Include="Game_variables.cpp" />
+    <ClCompile Include="objectPointer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BBlock.h" />
+    <ClInclude Include="ControlPoint.h" />
     <ClInclude Include="Game_animation.h" />
     <ClInclude Include="Game_refs.h" />
+    <ClInclude Include="ObjectPointer.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

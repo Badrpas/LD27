@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="30" height="10" tilewidth="64" tileheight="64" backgroundcolor="#32d4c1">
+<map version="1.0" orientation="orthogonal" width="34" height="100" tilewidth="64" tileheight="64" backgroundcolor="#32d4c1">
  <tileset firstgid="1" name="blocks" tilewidth="64" tileheight="64">
   <image source="../images/block.png" width="64" height="64"/>
  </tileset>
- <layer name="Слой тайлов 1" width="30" height="10">
+ <tileset firstgid="2" name="man" tilewidth="64" tileheight="128">
+  <image source="../images/man.png" width="64" height="128"/>
+ </tileset>
+ <tileset firstgid="3" name="free" tilewidth="64" tileheight="64">
+  <image source="../images/points/free.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="4" name="finish" tilewidth="64" tileheight="64">
+  <image source="../images/points/finish.png" width="64" height="64"/>
+ </tileset>
+ <layer name="Слой тайлов 1" width="34" height="100">
   <data encoding="base64" compression="zlib">
-   eJxjZGBgYBwgTA6gxExK7KXEHGrZSyoY6vaSmlaoYS856ZQUddjU0yI9o5uPSy85dg9UeQHCAP84AHQ=
+   eJzt2dmOwyAMBdCk6f9/c58qRcjLNV7IYku8sOUMNdBm9m3b9gVlDKouO9qhP/Pqjtl8+4JzRTuy90s71jsOgy8iOEf1fpY+g3a0ox3taMf7HAfRvgt1VNuMY6z3rJHm4O5bqn+24xzU2q9wSP3b0Y52tAN1aH3v6NDmeasD/R2b5ThO49+ep8gzohzUOxTLPB7H7JmXuR7UPJ7v5dEO5JlVjso81RxV+1bKB2QezaH9HXd1zN4vkQ7P/RLl8ObpFfNDskiO8e6pcHCl2sG1WR3nOIj2FQ7rPZXpQOvb8U4H+j/ECMfMXox2SPVa290c6JztqHGg9y83PsphmTPyO1amAw1pzbm+mQ503GjJcMyMicgP7jPxjKX6ofOM6+zJF4uDOxe4eu7dlXTOZBXJURWVDum9ocVhXV9rX4tDC/T8Qfp693yEQzrHpL1HjdH2qubQ2rg1lBxo3zs7Zj6XDAcV6F58msN7jkU4ouIJjugy68gKj+Oz0JFZUEdVaLlTaUDPoYryjx8QXwNz
   </data>
  </layer>
 </map>

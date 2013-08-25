@@ -10,7 +10,7 @@ int main ( int argc, char * argv[] ) {
 	while ( !quit ) {
 		Uint32 timePre = time;
 		time = SDL_GetTicks();
-		dt = ((float)( time - timePre )) / 1000.0f;
+		dt = ((double)( time - timePre )) / 1000.0;
 		pollEvent();
 		update();
 		render();

@@ -10,6 +10,8 @@
 #include "Game_animation.h"
 #include "BBlock.h"
 #include "Player.h"
+#include "ControlPoint.h"
+#include "ObjectPointer.h"
 
 typedef unsigned int Uint;
 
@@ -19,7 +21,7 @@ extern const	Uint			SCREEN_HEIGHT;
 extern const	int				SCREEN_BPP;
 extern			SDL_Surface*	screen;
 extern			int				FLAGS;
-extern			float			dt;
+extern			double			dt;
 
 // init funcs
 extern			bool			initGL			();
@@ -44,12 +46,18 @@ extern			void			draw			(GLuint texture,  float x, float y,
 
 extern			BAnimation*		playerStand;
 extern			GLuint			blockTexture;
+extern			GLuint			blockTextureAlt;
+
+extern			GLuint			pointTextureFree;
+extern			GLuint			pointTextureVisited;
+extern			GLuint			pointTextureFinish;
+
 extern			GLuint			manTexture;
 extern			GLuint			manTextureRun;
+extern			GLuint*			manTextureRunArray;
 extern			GLuint			manTextureJump;
 extern			GLuint			manTextureOnEnge;
 extern			GLuint			manTextureOnWall;
-extern			GLuint			blockTextureAlt;
 
 extern			float			CAMERA_SHIFT_X;
 extern			float			CAMERA_SHIFT_Y;
@@ -69,6 +77,10 @@ extern			b2World*		world;
 
 extern			Player*			player;
 extern			std::vector < BBlock* > blocks;
+extern			std::vector < CPoint* > points;
+
+extern			CPoint*			spawnPoint;
+extern			float32			timeLeft;
 
 
 // Pixels to Metrs

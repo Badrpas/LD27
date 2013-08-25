@@ -28,7 +28,10 @@ BBlock::BBlock ( float x_, float y_ ) {
 
 	blocks.push_back( this );
 
-	body->SetUserData( this );
+	ObjectPointer *p;
+	p = new ObjectPointer();
+	p->pointer = this;
+	body->SetUserData( p );
 }
 
 void BBlock::Update() {

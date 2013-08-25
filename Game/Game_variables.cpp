@@ -12,20 +12,31 @@
 	const	float32 BLOCK_SIZE_DIAGONAL_P2	= BLOCK_SIZE_DIAGONAL * BLOCK_SIZE_DIAGONAL;
 	SDL_Surface*	screen;
 	int		FLAGS = SDL_HWSURFACE | SDL_GL_DOUBLEBUFFER | SDL_OPENGL;
-	float	dt;
+	double	dt;
 
 	// gameplay vars
 
 	Player*		player;
 	std::vector < BBlock* > blocks;
+	std::vector < CPoint* > points;
+
+	CPoint*		spawnPoint;
+	float32		timeLeft;
 
 	// graphics
 
 	BAnimation*	playerStand;
+	
 	GLuint		blockTexture;
 	GLuint		blockTextureAlt;
+	
+	GLuint		pointTextureFree;
+	GLuint		pointTextureVisited;
+	GLuint		pointTextureFinish;
+
 	GLuint		manTexture;
 	GLuint		manTextureJump;
 	GLuint		manTextureOnEnge;
 	GLuint		manTextureRun;
 	GLuint		manTextureOnWall;
+	GLuint*		manTextureRunArray;

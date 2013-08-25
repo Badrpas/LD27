@@ -11,7 +11,7 @@ public:
 	void		Render			();
 	void		Update			();
 	b2Body*		GetBody			();
-
+	void		Respawn			();
 protected:
 	float32		speed;
 	float32		height;
@@ -23,6 +23,7 @@ protected:
 	Look		look;
 	bool		canJump;
 	float32		timeToControl;
+	float		desiredVel;
 };
 
 

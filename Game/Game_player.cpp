@@ -1,16 +1,21 @@
 #include "Game_refs.h"
 
+float32 runAnimationTimer = 0;
+float32 runAnimationTimerDelay = 0.05;
+
 Player::Player( float x, float y ) {
 	state = STAND;
 	speed = 200.5f;
 	look  = RIGHT;
 	timeToControl = 0;
+	desiredVel = 0;
+
+
 	b2BodyDef		_bodyDef;
 	b2PolygonShape	_bodyShape;
 	b2CircleShape	_circleShape, 
 					_circleShape2;
 	b2FixtureDef	_bodyFixture;
-
 	_bodyDef.type = b2_dynamicBody;		// Объект, ска, динамичен!
 	_bodyDef.position.Set( ptom( x ), ptom ( SCREEN_HEIGHT - y ) );
 	_bodyDef.linearDamping = 0.0f;		// Торможение
@@ -38,8 +43,19 @@ Player::Player( float x, float y ) {
 	body->SetFixedRotation( true );
 }
 
+void Player::Respawn() {
+	b2Vec2 pos = spawnPoint->GetBody()->GetPosition();
+	pos.y += ptom(circleRadius - 5.0);
+	body->SetTransform ( pos, 0.0 );
+	timeLeft = 10.0;
+}
+
 void Player::Update() {
-	if ( timeToControl > 0 );
+
+
+
+
+	if ( timeToControl > 0 )
 		timeToControl -= dt;
 
 	float32 mod = 0;
@@ -48,33 +64,13 @@ void Player::Update() {
 	float32 jumpPower = ptom( speed );
 	jumpPower *= body->GetMass();
 
-
-	//if ( timeToControl <= 0 ) {
-	//	if ( keyPressed( SDLK_RIGHT ) || keyPressed( SDLK_LEFT ) ) {
-	//		if ( keyPressed( SDLK_LEFT  ) ) {
-	//			look = LEFT;
-	//			state = RUN;
-	//			body->ApplyLinearImpulseCenter( b2Vec2(-jumpPower, 0 ) );
-	//		}
-	//		if ( keyPressed( SDLK_RIGHT ) ) {
-	//			look = RIGHT;
-	//			state = RUN;
-	//			body->ApplyLinearImpulseCenter( b2Vec2( jumpPower, 0 ) );
-	//		}
-	//		if ( keyPressed( SDLK_RIGHT ) && keyPressed( SDLK_LEFT ) ) {
-	//			state = STAND;
-	//		}
-	//	}
-	//}
-
-
-
-    float desiredVel = 0;
-	//state = STAND;
 	if ( ( timeToControl <= 0 ) ) {
+		desiredVel -= dt * 2;
+		if (desiredVel < 0)
+			desiredVel = 0;
 		if ( keyPressed(SDLK_RIGHT) || keyPressed(SDLK_LEFT ) ) {
 			if ( keyPressed(SDLK_LEFT ) ) {
-				desiredVel = -5;
+				desiredVel = 5;
 				look  = LEFT;
 				state = RUN;
 			}
@@ -90,7 +86,7 @@ void Player::Update() {
 		} else 
 		if ( (state == STAND) || (state == RUN) )
 			desiredVel = 0;
-		float velChange = desiredVel - vel.x;
+		float velChange = ((int)look)*desiredVel - vel.x;
 		float force = body->GetMass() * velChange / (dt); //f = mv/t
 		body->ApplyForce ( b2Vec2(force,0), body->GetWorldCenter() );
 	}
@@ -113,40 +109,50 @@ void Player::Update() {
 	for ( b2ContactEdge* ce = body->GetContactList(); ce; ce = ce->next ) {
 		b2Contact* c = ce->contact;
 		c->SetRestitution( 0.0 );
-		BBlock* block =  ( BBlock* )( ce->other->GetUserData() );
-		block->SetTexture( blockTextureAlt );
-		b2Vec2 bpos = block->GetBody()->GetPosition();
-				// onWall
-		if ( abs( bpos.x - pos.x ) <= ptom( BLOCK_SIZE_2 + circleRadius + 2.0f ) &&
-			 abs( bpos.x - pos.x ) >= ptom( BLOCK_SIZE_2 + circleRadius - 2.0f ) &&
-			      bpos.y - pos.y   <= ptom( BLOCK_SIZE ) &&
-				  bpos.y - pos.y   >= ptom(-BLOCK_SIZE_2 )
-			) {
-				block->color[0] = 0;
-				block->color[1] = 0;
-				//state = ON_WALL;
-				blockContactCount++;
-				if ( bpos.x < pos.x )
-					look = RIGHT;
-				else
-					look = LEFT;
-		} else {
+		ObjectPointer* p = (ObjectPointer*)( ce->other->GetUserData() );
+		if (p->type == O_BLOCK) {
+			BBlock* block =  ( BBlock* )( p->pointer );
+			block->SetTexture( blockTextureAlt );
+			b2Vec2 bpos = block->GetBody()->GetPosition();
+					// onWall
+			if ( abs( bpos.x - pos.x ) <= ptom( BLOCK_SIZE_2 + circleRadius + 2.0f ) &&
+				 abs( bpos.x - pos.x ) >= ptom( BLOCK_SIZE_2 + circleRadius - 2.0f ) &&
+					  bpos.y - pos.y   <= ptom( BLOCK_SIZE ) &&
+					  bpos.y - pos.y   >= ptom(-BLOCK_SIZE_2 )
+				) {
+					block->color[0] = 0;
+					block->color[1] = 0;
+					//state = ON_WALL;
+					blockContactCount++;
+					if ( bpos.x < pos.x )
+						look = RIGHT;
+					else
+						look = LEFT;
+			} else {
+			}
+
+			// canJump
+			if  (  abs( bpos.x - pdpos.x ) <= ptom( BLOCK_SIZE_DIAGONAL_2 ) &&
+						( pdpos.y >=bpos.y ) &&
+						( pdpos.y - bpos.y <= BLOCK_SIZE_DIAGONAL_2 ) ) {
+				height = body->GetPosition().y - bpos.y;
+				if ( keyPressed( SDLK_RIGHT ) || keyPressed( SDLK_LEFT ) )
+					state = RUN;
+				else 
+					state = STAND;
+				block->color[0] = 2;
+				block->color[1] = 2;
+				canJump = true;
+				timeToControl = 0;
+			}
+		} else if ( p->type == O_POINT ) {
+			CPoint * point = ( CPoint* )( p->pointer );
+			b2Vec2 pointPos =  point->GetBody()->GetPosition();
+			if  ( abs( pointPos.x - pdpos.x ) <= ptom( BLOCK_SIZE_DIAGONAL_2 ) &&
+				( abs( pdpos.y - pointPos.y ) <= ptom( BLOCK_SIZE_DIAGONAL_2 ) )) {
+					point->SetActive();
+			}
 		}
-
-		// canJump
-		if  (  abs( bpos.x - pdpos.x ) <= ptom( BLOCK_SIZE_DIAGONAL_2 ) &&
-					( pdpos.y >=bpos.y ) &&
-					( pdpos.y - bpos.y <= BLOCK_SIZE_DIAGONAL_2 ) ) {
-			height = body->GetPosition().y - bpos.y;
-			if ( keyPressed( SDLK_RIGHT ) || keyPressed( SDLK_LEFT ) )
-				state = RUN;
-			else 
-				state = STAND;
-			canJump = true;
-			timeToControl = 0;
-		}
-
-
 	}
 
 	if ( !canJump ) {
@@ -154,7 +160,12 @@ void Player::Update() {
 		if ( blockContactCount >= 1 ) {
 			state = ON_WALL;
 			body->ApplyLinearImpulseCenter ( b2Vec2 ( 2.0 * (-(int)look), 0.0  ) );
+			desiredVel = 0;
 		}
+	}
+
+	if ( (blockContactCount >= 1) && ( state == RUN || state == STAND ) ) {
+		look = (Look)(-(int)look);
 	}
 
 
@@ -173,12 +184,16 @@ void Player::Update() {
 			body->SetForce ( b2Vec2( 0, 0 ) );
 			body->ApplyLinearImpulse( b2Vec2( jumpPower*1.0*((int)look), jumpPower ), body->GetWorldCenter() );
 			timeToControl = 0.5;
+			desiredVel = 5;
 		}
 	}
 	
-
 	CAMERA_SHIFT_X = mtop(body->GetPosition().x) - SCREEN_WIDTH / 2 / SCALE_IMAGE;
 	CAMERA_SHIFT_Y = mtop(body->GetPosition().y) - SCREEN_HEIGHT/ 2 * SCALE_IMAGE;
+
+	if ( timeLeft <= 0 || keyUp(SDLK_r) ) {
+		Respawn();
+	}
 }
 
 b2Body*	Player::GetBody() {
@@ -186,9 +201,14 @@ b2Body*	Player::GetBody() {
 }
 
 void Player::Render() {
+
+	runAnimationTimer += dt;
+	if (runAnimationTimer > runAnimationTimerDelay*5)
+		runAnimationTimer = 0;
+
 	switch ( state ) {
 		case STAND:		texture = manTexture;		break;
-		case RUN:		texture = manTextureRun;	break;
+		case RUN:		texture = manTextureRunArray[(int) (runAnimationTimer / runAnimationTimerDelay)];	break;
 		case JUMP:		texture = manTextureJump;	break;
 		case ON_EDGE:	texture = manTextureOnEnge;	break;
 		case ON_WALL:	texture = manTextureOnWall;	break;
