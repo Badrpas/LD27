@@ -2,11 +2,13 @@
 
 
 void loadData() {
-	blockTexture = loadTexture ( "images/block.png", GL_RGB );
-	manTexture   = loadTexture ( "images/man.png", GL_RGBA );
+	blockTexture		= loadTexture ( "images/block.png",    GL_RGB );
+	blockTextureAlt		= loadTexture ( "images/blockAlt.png", GL_RGBA );
+	manTexture			= loadTexture ( "images/man.png", GL_RGBA );
+	manTextureJump		= loadTexture ( "images/man_jump.png", GL_RGBA );
 	
 	loadMap("1.map");
-	player = new Player(100.0f, 100.0f);
+	player = new Player(100.0f, 400.0f);
 
 }
 

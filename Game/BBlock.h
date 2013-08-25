@@ -8,8 +8,10 @@ public:
 	void		Render			();
 	void		Update			();
 	b2Body*		GetBody			();
+	void		SetTexture		( GLuint texture_ );
 protected:
 	b2Body*		body;
+	GLuint		texture;
 };
 
 #endif _BBLOCK_

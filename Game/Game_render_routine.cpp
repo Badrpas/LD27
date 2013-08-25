@@ -16,10 +16,10 @@ void draw(	GLuint texture,
 	glRotatef		( r/M_PI*180.0, 0, 0, 1 );
 	glTranslatef	(-x,-y, 0);
     glBegin			( GL_QUADS );
-		glTexCoord2f(0   ,0   );	glVertex3f( - CAMERA_SHIFT_X + x - dx		, - CAMERA_SHIFT_Y + y - dy		, _z);
-		glTexCoord2f(1.0f,0   );	glVertex3f( - CAMERA_SHIFT_X + x - dx + w	, - CAMERA_SHIFT_Y + y - dy		, _z);
-		glTexCoord2f(1.0f,1.0f);	glVertex3f( - CAMERA_SHIFT_X + x - dx + w	, - CAMERA_SHIFT_Y + y - dy + h	, _z);
-		glTexCoord2f(0,   1.0f);	glVertex3f( - CAMERA_SHIFT_X + x - dx		, - CAMERA_SHIFT_Y + y - dy + h	, _z);
+		glTexCoord2f(0   ,0   );	glVertex3f( (- CAMERA_SHIFT_X + x - dx)	* SCALE_IMAGE	,  (CAMERA_SHIFT_Y + y - dy	)* SCALE_IMAGE	, _z);
+		glTexCoord2f(1.0f,0   );	glVertex3f( (- CAMERA_SHIFT_X + x - dx + w)* SCALE_IMAGE	,  (CAMERA_SHIFT_Y + y - dy	)* SCALE_IMAGE	, _z);
+		glTexCoord2f(1.0f,1.0f);	glVertex3f( (- CAMERA_SHIFT_X + x - dx + w)* SCALE_IMAGE	,  (CAMERA_SHIFT_Y + y - dy + h)* SCALE_IMAGE	, _z);
+		glTexCoord2f(0,   1.0f);	glVertex3f( (- CAMERA_SHIFT_X + x - dx)* SCALE_IMAGE		,  (CAMERA_SHIFT_Y + y - dy + h)* SCALE_IMAGE	, _z);
     glEnd();
 	glPopMatrix();
 }

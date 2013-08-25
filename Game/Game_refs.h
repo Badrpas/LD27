@@ -45,6 +45,8 @@ extern			void			draw			(GLuint texture,  float x, float y,
 extern			BAnimation*		playerStand;
 extern			GLuint			blockTexture;
 extern			GLuint			manTexture;
+extern			GLuint			manTextureJump;
+extern			GLuint			blockTextureAlt;
 
 
 extern			float			CAMERA_SHIFT_X;
@@ -52,6 +54,13 @@ extern			float			CAMERA_SHIFT_Y;
 
 
 // physics
+extern	const	float32			SCALE_IMAGE;
+extern	const	float32			BLOCK_SIZE;
+extern	const	float32			BLOCK_SIZE_2;
+extern	const	float32			BLOCK_SIZE_DIAGONAL;
+extern	const	float32			BLOCK_SIZE_DIAGONAL_2;
+extern	const	float32			BLOCK_SIZE_DIAGONAL_P2;
+
 
 extern			b2Vec2			gravity;
 extern			b2World*		world;
@@ -59,7 +68,6 @@ extern			b2World*		world;
 extern			Player*			player;
 extern			std::vector < BBlock* > blocks;
 
-extern	const	float			BLOCK_SIZE;
 
 // Pixels to Metrs
 extern			float			ptom			( float pixels );

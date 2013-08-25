@@ -1,6 +1,7 @@
 #include "Game_refs.h"
 
 BBlock::BBlock ( float x_, float y_ ) {	
+	texture = blockTexture;
 	float halfWidth  = ptom ( BLOCK_SIZE / 2.0f );
 	float halfHeight = ptom ( BLOCK_SIZE / 2.0f );
 	
@@ -21,13 +22,21 @@ BBlock::BBlock ( float x_, float y_ ) {
 	body->CreateFixture( &_bodyFixture );
 
 	blocks.push_back( this );
+
+	body->SetUserData( this );
 }
 
 void BBlock::Update() {
+	if ( texture == blockTextureAlt )
+		texture = blockTexture;
+}
+
+void BBlock::SetTexture( GLuint texture_ ) {
+	texture = texture_;
 }
 
 void BBlock::Render() {
-	draw ( blockTexture,mtop( body->GetPosition().x ), 
+	draw ( texture, mtop( body->GetPosition().x ), 
 			SCREEN_HEIGHT - mtop( body->GetPosition().y ), 
 			BLOCK_SIZE,	BLOCK_SIZE, 0.0f, 
 			(BLOCK_SIZE / 2 ), BLOCK_SIZE / 2 );

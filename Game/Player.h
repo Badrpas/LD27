@@ -13,9 +13,12 @@ public:
 
 protected:
 	float32		speed;
+	float32		height;
 	PlayerState state;
 	b2Vec2		pos;
 	b2Body*		body;
+	GLuint		texture;
+	float32		circleRadius;
 };
 
 
