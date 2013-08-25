@@ -9,6 +9,7 @@ public:
 	void		Update			();
 	b2Body*		GetBody			();
 	void		SetTexture		( GLuint texture_ );
+	GLdouble*	color;
 protected:
 	b2Body*		body;
 	GLuint		texture;

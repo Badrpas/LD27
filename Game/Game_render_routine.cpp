@@ -12,9 +12,9 @@ void draw(	GLuint texture,
 	glBindTexture	( GL_TEXTURE_2D, texture );
 	GLfloat _z = 0.0f;
 	glPushMatrix	();
-	glTranslatef	( x, y, 0);
-	glRotatef		( r/M_PI*180.0, 0, 0, 1 );
-	glTranslatef	(-x,-y, 0);
+	glTranslatef	(  x, y, 0);
+	glRotated		( r/M_PI*180.0, 0, 0, 1 );
+	glTranslatef	( -x,-y, 0 );
     glBegin			( GL_QUADS );
 		glTexCoord2f(0   ,0   );	glVertex3f( (- CAMERA_SHIFT_X + x - dx)	* SCALE_IMAGE	,  (CAMERA_SHIFT_Y + y - dy	)* SCALE_IMAGE	, _z);
 		glTexCoord2f(1.0f,0   );	glVertex3f( (- CAMERA_SHIFT_X + x - dx + w)* SCALE_IMAGE	,  (CAMERA_SHIFT_Y + y - dy	)* SCALE_IMAGE	, _z);
@@ -22,6 +22,7 @@ void draw(	GLuint texture,
 		glTexCoord2f(0,   1.0f);	glVertex3f( (- CAMERA_SHIFT_X + x - dx)* SCALE_IMAGE		,  (CAMERA_SHIFT_Y + y - dy + h)* SCALE_IMAGE	, _z);
     glEnd();
 	glPopMatrix();
+	glColor4d(1.0, 1.0, 1.0, 1.0);
 }
 
 

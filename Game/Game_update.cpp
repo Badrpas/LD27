@@ -7,7 +7,7 @@ void considerKeys();
 
 void update(){
 	considerKeys();
-	world->Step(dt, 6, 2);
+	world->Step(dt, 10, 8);
 	for ( Uint i = 0; i < blocks.size(); i++ )
 		blocks[i]->Update();
 	player->Update();

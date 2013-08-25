@@ -1,6 +1,11 @@
 #include "Game_refs.h"
 
-BBlock::BBlock ( float x_, float y_ ) {	
+BBlock::BBlock ( float x_, float y_ ) {
+	color = (GLdouble*) malloc ( sizeof(float32) * 4 );
+	color[0] = 1.0;
+	color[1] = 1.0;
+	color[2] = 1.0;
+	color[3] = 1.0;
 	texture = blockTexture;
 	float halfWidth  = ptom ( BLOCK_SIZE / 2.0f );
 	float halfHeight = ptom ( BLOCK_SIZE / 2.0f );
@@ -16,7 +21,7 @@ BBlock::BBlock ( float x_, float y_ ) {
 	
 	body = world->CreateBody( &_bodyDef );
 	_bodyFixture.shape		= &_bodyShape;
-	_bodyFixture.density	= 1.0f;
+	_bodyFixture.density	= 0.5f;
 	_bodyFixture.friction	= 0.0f;
 	_bodyFixture.restitution= 0.0f;
 	body->CreateFixture( &_bodyFixture );
@@ -29,6 +34,10 @@ BBlock::BBlock ( float x_, float y_ ) {
 void BBlock::Update() {
 	if ( texture == blockTextureAlt )
 		texture = blockTexture;
+	color[0] = 1.0;
+	color[1] = 1.0;
+	color[2] = 1.0;
+	color[3] = 1.0;
 }
 
 void BBlock::SetTexture( GLuint texture_ ) {
@@ -36,6 +45,7 @@ void BBlock::SetTexture( GLuint texture_ ) {
 }
 
 void BBlock::Render() {
+	glColor4dv( color );
 	draw ( texture, mtop( body->GetPosition().x ), 
 			SCREEN_HEIGHT - mtop( body->GetPosition().y ), 
 			BLOCK_SIZE,	BLOCK_SIZE, 0.0f, 

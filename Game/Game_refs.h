@@ -45,9 +45,11 @@ extern			void			draw			(GLuint texture,  float x, float y,
 extern			BAnimation*		playerStand;
 extern			GLuint			blockTexture;
 extern			GLuint			manTexture;
+extern			GLuint			manTextureRun;
 extern			GLuint			manTextureJump;
+extern			GLuint			manTextureOnEnge;
+extern			GLuint			manTextureOnWall;
 extern			GLuint			blockTextureAlt;
-
 
 extern			float			CAMERA_SHIFT_X;
 extern			float			CAMERA_SHIFT_Y;

@@ -26,3 +26,6 @@
 	GLuint		blockTextureAlt;
 	GLuint		manTexture;
 	GLuint		manTextureJump;
+	GLuint		manTextureOnEnge;
+	GLuint		manTextureRun;
+	GLuint		manTextureOnWall;
