@@ -151,8 +151,10 @@ void Player::Update() {
 
 	if ( !canJump ) {
 		state = JUMP;
-		if ( blockContactCount >= 1 )
+		if ( blockContactCount >= 1 ) {
 			state = ON_WALL;
+			body->ApplyLinearImpulseCenter ( b2Vec2 ( 2.0 * (-(int)look), 0.0  ) );
+		}
 	}
 
 
