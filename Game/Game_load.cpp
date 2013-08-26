@@ -1,8 +1,21 @@
 #include "Game_refs.h"
 
+char	mapList[255][255];
+int		mapCount;
+int		currentMap;
+bool	NEED_LOAD_NEXT_MAP = false;
 
 void loadData() {
-	blockTexture		= loadTexture ( "images/block.png",				GL_RGB );
+
+	backgroundTexture   = ( GLuint* ) malloc ( sizeof (GLuint) * 5 );	
+	backgroundTexture[0]= loadTexture ( "images/bg/1.png" ,			GL_RGBA );
+	backgroundTexture[1]= loadTexture ( "images/bg/init.png" ,		GL_RGBA );
+	backgroundTexture[2]= loadTexture ( "images/bg/jumpToWin.png" ,	GL_RGBA );
+	backgroundTexture[3]= loadTexture ( "images/bg/restart.png" ,	GL_RGBA );
+	backgroundTexture[4]= loadTexture ( "images/bg/maze.png" ,			GL_RGBA );
+
+
+	blockTexture		= loadTexture ( "images/block.png",				GL_RGB  );
 	blockTextureAlt		= loadTexture ( "images/blockAlt.png",			GL_RGBA );
 	
 	pointTextureFinish	= loadTexture ( "images/points/finish.png",		GL_RGBA );
@@ -21,10 +34,53 @@ void loadData() {
 	manTextureOnEnge	= loadTexture ( "images/man_onEdge.png",		GL_RGBA );
 	manTextureOnWall	= loadTexture ( "images/man_onWall.png",		GL_RGBA );
 	
-	loadMap("1.lua");
+	loadMapList();
+	loadNextMap();
+}
 
 
 
+void loadNextMap() {
+	currentMap++;
+	printf ( "loading map ¹ %i %s\n", currentMap, mapList[currentMap] );
+	flushMap();
+	world = new b2World(gravity);
+	if ( currentMap < mapCount )
+		loadMap ( mapList[currentMap] );
+	else {
+		loadMap ( "default.lua" );
+		SCALE_IMAGE = 0.25;
+	}
+}
+
+void flushMap() {
+	delete world;
+	delete player;
+	player = NULL;
+	for ( Uint i = 0; i < blocks.size(); i++ ) {
+		delete blocks[i];
+	}
+	blocks.resize(0);
+	for ( Uint i = 0; i < points.size(); i++ ) {
+		delete points[i];
+	}
+	points.resize(0);
+}
+
+
+
+void loadMapList() {
+	FILE* file;
+	currentMap = -1;
+	char path[255] = "maps/maplist.txt" ;
+	file = fopen( path, "r" );
+	fscanf ( file, "%i\n", &mapCount );
+	printf ( "%i maps:\n", mapCount );
+	for (int i = 0; i < mapCount; i++ ) {
+		fscanf ( file, "%s\n", mapList[i] );
+		printf ( "%s\n", mapList[i] );
+	}
+	fclose(file);
 }
 
 void loadMap( char * fileName ){
@@ -32,6 +88,7 @@ void loadMap( char * fileName ){
 	char path[255];
 	strcpy ( path, "maps/" );
 	strcat ( path, fileName );
+	printf("Loading %s\n", path);
 	file = fopen( path, "r" );
 	std::vector< int > map;
 	Uint i;
@@ -45,7 +102,6 @@ void loadMap( char * fileName ){
 			char word[255];
 			for ( int i = 0; i < 4; i++ ) {
 				fscanf( file, "%[^\n]\n", word );
-				printf("%s\n", word);
 			}
 			fscanf( file, "%s = %i,\n", word, &w );
 			fscanf( file, "%s = %i,\n", word, &h );
@@ -59,8 +115,9 @@ void loadMap( char * fileName ){
 		result = fscanf( file, "%i, ", &(a));
 		map.push_back(a);
 	}
-	printf ( "%i\n", i );
+	printf("Map readed\n");
 	for ( i = 0; i < size; i++ ) {
+		printf("Block (%i) %i:%i ", map[i], ( i % w ),  ( i / w ) );
 		if ( map[i] == 1 )
 			new BBlock( BLOCK_SIZE_2 + ( i % w ) * BLOCK_SIZE,  ( i / w ) * BLOCK_SIZE );
 		if ( map[i] == 2 ) {
@@ -76,4 +133,5 @@ void loadMap( char * fileName ){
 	}
 
 	fclose( file );
+	printf ( "Loaded.\n" );
 }

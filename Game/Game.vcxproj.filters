@@ -77,5 +77,8 @@
     <ClInclude Include="ObjectPointer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="hint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

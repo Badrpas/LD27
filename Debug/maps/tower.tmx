@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="34" height="100" tilewidth="64" tileheight="64" backgroundcolor="#32d4c1">
+ <tileset firstgid="1" source="blocks.tsx"/>
+ <tileset firstgid="2" source="man.tsx"/>
+ <tileset firstgid="3" source="free.tsx"/>
+ <tileset firstgid="4" source="finish.tsx"/>
+ <layer name="Слой тайлов 1" width="34" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt2dmOwyAMBdCk6f9/c58qRcjLNV4ojS3xwpYz1ECbOY/jOBeUMai67GiH/sxfd8zm2xucK9qRvV/asd5xGXwRwTmq97P0GbSjHe1oRzue57iI9lOoo9pmHGO9Z400B3ffUv2zHfeg1n6FQ+rfjna0ox2oQ+u7o0Ob56kO9HdsluO6jX96niLPiHJQ71As83gcs2de5npQ83i+l0c7kGdWOSrzVHNU7VspH5B5NIf2d+zqmL1fIh2e+yXK4c3TX8wPySI5xrunwsGVagfXZnXc4yLaVzis91SmA61vx14ONNc1B/o/xIj1mNmL0Q6pXmvbzYHO2Y4aB3r/cuOjHJY5I79jZTrQkNac65vpQMeNlgzHzJiI/OA+E89Yqh86z7jOnnyxOLhzgavn3l1J50xWkRxVUe2Q1h91WNfX2tfi0AI9f5C+3j0f4ZDOMWnvUWO0vao5tDZuDSUH2ndnx8znkuGgAt2L/+bwnmMRjqj4B0d0mXVkhcfxWujILKijKrTcyY7v+zLLOVRRvvEBTaMDeQ==
+  </data>
+ </layer>
+</map>

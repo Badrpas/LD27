@@ -44,11 +44,15 @@ void CPoint::Render() {
 }
 
 void CPoint::SetActive() {
-	type = CONTROL_POINT_VISITED;
-	spawnPoint->SetUnActive();
-	texture = pointTextureVisited;
-	timeLeft = 10.0;
-	spawnPoint = this;
+	if ( type == FINISH ) {
+		NEED_LOAD_NEXT_MAP = true;
+	} else {
+		type = CONTROL_POINT_VISITED;
+		spawnPoint->SetUnActive();
+		texture = pointTextureVisited;
+		timeLeft = 10.0;
+		spawnPoint = this;
+	}
 }
 
 void CPoint::SetUnActive() {

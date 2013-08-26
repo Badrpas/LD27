@@ -4,7 +4,7 @@
 	const	Uint	SCREEN_WIDTH	= 1024;
 	const	Uint	SCREEN_HEIGHT	= 600;
 	const	int		SCREEN_BPP		= 32;
-	const	float32 SCALE_IMAGE		= 0.5;
+			double	SCALE_IMAGE		= 0.5;
 	const	float32	BLOCK_SIZE		= 64.0;
 	const	float32	BLOCK_SIZE_2	= BLOCK_SIZE / 2.0;
 	const	float32 BLOCK_SIZE_DIAGONAL		= sqrt( BLOCK_SIZE*BLOCK_SIZE + BLOCK_SIZE*BLOCK_SIZE );
@@ -27,6 +27,9 @@
 
 	BAnimation*	playerStand;
 	
+	GLuint*		backgroundTexture;
+
+
 	GLuint		blockTexture;
 	GLuint		blockTextureAlt;
 	

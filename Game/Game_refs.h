@@ -12,6 +12,7 @@
 #include "Player.h"
 #include "ControlPoint.h"
 #include "ObjectPointer.h"
+#include "hint.h"
 
 typedef unsigned int Uint;
 
@@ -23,12 +24,21 @@ extern			SDL_Surface*	screen;
 extern			int				FLAGS;
 extern			double			dt;
 
+extern			char			mapList[255][255];
+extern			int				mapCount;
+extern			int				currentMap;
+
 // init funcs
 extern			bool			initGL			();
 extern			bool			init			();
 extern			void			loadData		();
 extern			void			loadMap			( char * fileName );
+extern			void			loadMapList		();
+extern			void			loadNextMap		();
+extern			void			flushMap		();
 
+extern			bool			NEED_LOAD_NEXT_MAP;
+	
 // loop funcs
 extern			void			pollEvent		();
 extern			void			render			();
@@ -45,6 +55,9 @@ extern			void			draw			(GLuint texture,  float x, float y,
 												float dx = 0.0f,  float dy = 0.0f );
 
 extern			BAnimation*		playerStand;
+
+extern			GLuint*			backgroundTexture;
+
 extern			GLuint			blockTexture;
 extern			GLuint			blockTextureAlt;
 
@@ -64,7 +77,7 @@ extern			float			CAMERA_SHIFT_Y;
 
 
 // physics
-extern	const	float32			SCALE_IMAGE;
+extern			double			SCALE_IMAGE;
 extern	const	float32			BLOCK_SIZE;
 extern	const	float32			BLOCK_SIZE_2;
 extern	const	float32			BLOCK_SIZE_DIAGONAL;

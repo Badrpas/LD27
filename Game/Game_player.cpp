@@ -4,12 +4,12 @@ float32 runAnimationTimer = 0;
 float32 runAnimationTimerDelay = 0.05;
 
 Player::Player( float x, float y ) {
-	state = STAND;
-	speed = 200.5f;
-	look  = RIGHT;
-	timeToControl = 0;
-	desiredVel = 0;
-
+	state			= STAND;
+	speed			= 200.5f;
+	look			= RIGHT;
+	timeToControl	= 0;
+	desiredVel		= 0;
+	blinkTime		= 1.5;
 
 	b2BodyDef		_bodyDef;
 	b2PolygonShape	_bodyShape;
@@ -48,15 +48,17 @@ void Player::Respawn() {
 	pos.y += ptom(circleRadius - 5.0);
 	body->SetTransform ( pos, 0.0 );
 	timeLeft = 10.0;
+	blinkTime = 1.5;
 }
 
 void Player::Update() {
 
-
-
-
 	if ( timeToControl > 0 )
 		timeToControl -= dt;
+
+	if ( blinkTime > 0 ) {
+		blinkTime -= dt;
+	}
 
 	float32 mod = 0;
 	b2Vec2 vel = body->GetLinearVelocity();
@@ -112,7 +114,7 @@ void Player::Update() {
 		ObjectPointer* p = (ObjectPointer*)( ce->other->GetUserData() );
 		if (p->type == O_BLOCK) {
 			BBlock* block =  ( BBlock* )( p->pointer );
-			block->SetTexture( blockTextureAlt );
+			//block->SetTexture( blockTextureAlt );
 			b2Vec2 bpos = block->GetBody()->GetPosition();
 					// onWall
 			if ( abs( bpos.x - pos.x ) <= ptom( BLOCK_SIZE_2 + circleRadius + 2.0f ) &&
@@ -120,8 +122,9 @@ void Player::Update() {
 					  bpos.y - pos.y   <= ptom( BLOCK_SIZE ) &&
 					  bpos.y - pos.y   >= ptom(-BLOCK_SIZE_2 )
 				) {
-					block->color[0] = 0;
-					block->color[1] = 0;
+					block->color[0] = 0.9;
+					block->color[1] = 0.9;
+					block->color[2] = 1.0;
 					//state = ON_WALL;
 					blockContactCount++;
 					if ( bpos.x < pos.x )
@@ -212,6 +215,9 @@ void Player::Render() {
 		case JUMP:		texture = manTextureJump;	break;
 		case ON_EDGE:	texture = manTextureOnEnge;	break;
 		case ON_WALL:	texture = manTextureOnWall;	break;
+	}
+	if ( blinkTime > 0 ) {
+		glColor4d( 1.0, 1.0, 1.0, 1.0 - blinkTime / 1.5 );
 	}
 	draw (	texture,  mtop( body->GetPosition().x ), 
 			SCREEN_HEIGHT - mtop( body->GetPosition().y ), 

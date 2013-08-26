@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="34" height="100" tilewidth="64" tileheight="64" backgroundcolor="#32d4c1">
- <tileset firstgid="1" name="blocks" tilewidth="64" tileheight="64">
-  <image source="../images/block.png" width="64" height="64"/>
- </tileset>
- <tileset firstgid="2" name="man" tilewidth="64" tileheight="128">
-  <image source="../images/man.png" width="64" height="128"/>
- </tileset>
- <tileset firstgid="3" name="free" tilewidth="64" tileheight="64">
-  <image source="../images/points/free.png" width="64" height="64"/>
- </tileset>
- <tileset firstgid="4" name="finish" tilewidth="64" tileheight="64">
-  <image source="../images/points/finish.png" width="64" height="64"/>
- </tileset>
+ <tileset firstgid="1" source="blocks.tsx"/>
+ <tileset firstgid="2" source="man.tsx"/>
+ <tileset firstgid="3" source="free.tsx"/>
+ <tileset firstgid="4" source="finish.tsx"/>
  <layer name="Слой тайлов 1" width="34" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt2dmOwyAMBdCk6f9/c58qRcjLNV7IYku8sOUMNdBm9m3b9gVlDKouO9qhP/Pqjtl8+4JzRTuy90s71jsOgy8iOEf1fpY+g3a0ox3taMf7HAfRvgt1VNuMY6z3rJHm4O5bqn+24xzU2q9wSP3b0Y52tAN1aH3v6NDmeasD/R2b5ThO49+ep8gzohzUOxTLPB7H7JmXuR7UPJ7v5dEO5JlVjso81RxV+1bKB2QezaH9HXd1zN4vkQ7P/RLl8ObpFfNDskiO8e6pcHCl2sG1WR3nOIj2FQ7rPZXpQOvb8U4H+j/ECMfMXox2SPVa290c6JztqHGg9y83PsphmTPyO1amAw1pzbm+mQ503GjJcMyMicgP7jPxjKX6ofOM6+zJF4uDOxe4eu7dlXTOZBXJURWVDum9ocVhXV9rX4tDC/T8Qfp693yEQzrHpL1HjdH2qubQ2rg1lBxo3zs7Zj6XDAcV6F58msN7jkU4ouIJjugy68gKj+Oz0JFZUEdVaLlTaUDPoYryjx8QXwNz
+   eJzt2tkOgjAQBVAQ//+bfTIhzSx3OgsUZpImphvH0kXRfdu2/YI0BpWXHe3Qr3l3x+x8+4J9RTuy10s7rnccBl9EcI7q9Szdg3a0ox3taMf7HAdRvgt5VNmMY8z3jJHm4M5bqn624xzU2F/hkOq3ox3taAfq0Oqu6ND6easD/R6b5ThO7d8+T5FrRDmoZyiWfjyO2T0vczyofjyfy6MdyDWrHJXzVHNUrVtpPiD9aA7tfazqmD1fIh2e8yXK4Z2nd5wfkkVyjGdPhYNL1Q6uzOo4x0GUX+GwnlOZDjS/HWs50LmuOdDfECPGY2YtRjukfK1sNQfaZztqHOj5y7WPclj6jPyMlelAQxpzrm6mA203WjIcM20i5gd3TzxtqXpoP+M4e+aLxcHtC1w+9+xK2meykuSoimqHNP6owzq+1roWhxbo/oPU9a75CIe0j0lrj2qjrVXNoZVxYyg50LorO2buS4aDCnQtPs3h3cciHFHxBEd0mnVkhcfxOb2m/quf6chMqKMqtLmTHf/nZZZ9qCL94wdXkwN9
   </data>
  </layer>
 </map>

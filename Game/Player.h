@@ -24,6 +24,7 @@ protected:
 	bool		canJump;
 	float32		timeToControl;
 	float		desiredVel;
+	double		blinkTime;
 };
 
 
