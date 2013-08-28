@@ -1,3 +1,5 @@
+#pragma warning( disable : 4244 )
+
 #include "Game_refs.h"
 
 double runAnimationTimer = 0;
@@ -5,7 +7,7 @@ double runAnimationTimerDelay = 0.05;
 
 Player::Player( float x, float y ) {
 	state			= STAND;
-	speed			= 200.5f;
+	speed			= 200.5f; 
 	look			= RIGHT;
 	timeToControl	= 0;
 	desiredVel		= 0;
@@ -45,7 +47,7 @@ Player::Player( float x, float y ) {
 
 void Player::Respawn() {
 	b2Vec2 pos = spawnPoint->GetBody()->GetPosition();
-	pos.y += ptom(circleRadius - 5.0);
+	pos.y += ptom( circleRadius - 5.0 );
 	body->SetTransform ( pos, 0.0 );
 	timeLeft = 10.0;
 	blinkTime = 1.5;
@@ -202,14 +204,11 @@ void Player::Update() {
 	}
 }
 
-b2Body*	Player::GetBody() {
-	return body;
-}
 
 void Player::Render() {
 
 	runAnimationTimer += dt;
-	if (runAnimationTimer > runAnimationTimerDelay*5)
+	if (runAnimationTimer >= runAnimationTimerDelay*5)
 		runAnimationTimer = 0;
 
 	switch ( state ) {
@@ -220,15 +219,19 @@ void Player::Render() {
 		case ON_WALL:	texture = manTextureOnWall;	break;
 	}
 	if ( blinkTime > 0 ) {
-		glColor4d( 1.0, 1.0, 1.0, 1.0 - blinkTime / 1.5 );
-	}
+		glColor4d ( 1.0, 1.0, 1.0, 1.0 - blinkTime / 1.5 );
+	} else 
+		glColor4d ( 1.0, 1.0, 1.0, 1.0 );
 	draw (	texture,  mtop( body->GetPosition().x ), 
 			SCREEN_HEIGHT - mtop( body->GetPosition().y ), 
 			BLOCK_SIZE   * (int)look, BLOCK_SIZE*2, body->GetAngle(), 
 			BLOCK_SIZE_2 * (int)look, BLOCK_SIZE );
 }
 
-b2Vec2 Player::GetPos() {
+b2Body*	Player::GetBody() {
+	return body;
+}
+b2Vec2  Player::GetPos () {
 	pos = body->GetPosition();
 	return pos;
 }
