@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "Game_refs.h"
 
 char	mapList[255][255];
@@ -54,17 +55,19 @@ void loadNextMap() {
 }
 
 void flushMap() {
-	delete world;
-	delete player;
+	if ( world )
+		delete world; 
+	if ( player )
+		delete player;
 	player = NULL;
 	for ( Uint i = 0; i < blocks.size(); i++ ) {
 		delete blocks[i];
 	}
-	blocks.resize(0);
+	blocks.resize( 0 );
 	for ( Uint i = 0; i < points.size(); i++ ) {
 		delete points[i];
 	}
-	points.resize(0);
+	points.resize( 0 );
 }
 
 
@@ -94,10 +97,7 @@ void loadMap( char * fileName ){
 	Uint i;
 	int result = 0;
 
-	int w=0,h=0;/*
-	fscanf( file, "%i, ", &w);
-	fscanf( file, "%i, ", &h);*/
-
+	int w=0,h=0;
 
 			char word[255];
 			for ( int i = 0; i < 4; i++ ) {
@@ -115,23 +115,31 @@ void loadMap( char * fileName ){
 		result = fscanf( file, "%i, ", &(a));
 		map.push_back(a);
 	}
-	printf("Map readed\n");
+	printf("Map data readed\n");
 	for ( i = 0; i < size; i++ ) {
-		printf("Block (%i) %i:%i ", map[i], ( i % w ),  ( i / w ) );
-		if ( map[i] == 1 )
-			new BBlock( BLOCK_SIZE_2 + ( i % w ) * BLOCK_SIZE,  ( i / w ) * BLOCK_SIZE );
-		if ( map[i] == 2 ) {
+	//	printf("Block (%i) %i:%i\n", map[i], ( i % w ),  ( i / w ) );
+		
+		ObjectPointer* pt =  NULL; // (ObjectPointer*) malloc ( sizeof(ObjectPointer) );
+		pt = new ObjectPointer();
+
+		if ( map[i] == 1 ) {
+			
+			BBlock * newBlock = new BBlock( BLOCK_SIZE_2 + ( i % w ) * BLOCK_SIZE,  ( i / w ) * BLOCK_SIZE );
+			pt->pointer = newBlock;
+			pt->type = O_BLOCK;
+			((BBlock*)(pt->pointer))->GetBody()->SetUserData( pt );
+
+		} else if ( map[i] == 2 ) {
 			spawnPoint = new CPoint ( BLOCK_SIZE_2 + ( i % w ) * BLOCK_SIZE,  ( i / w ) * BLOCK_SIZE, CONTROL_POINT);
 			player = new Player( BLOCK_SIZE_2 + ( i % w ) * BLOCK_SIZE,  ( i / w ) * BLOCK_SIZE );
-		}
-		if ( map[i] == 3 ) {
+		} else if ( map[i] == 3 ) {
 			new CPoint ( BLOCK_SIZE_2 + ( i % w ) * BLOCK_SIZE,  ( i / w ) * BLOCK_SIZE, CONTROL_POINT);
-		}		
-		if ( map[i] == 4 ) {
+		} else if ( map[i] == 4 ) {
 			new CPoint ( BLOCK_SIZE_2 + ( i % w ) * BLOCK_SIZE,  ( i / w ) * BLOCK_SIZE, FINISH);
-		}
+		} 
+
 	}
 
 	fclose( file );
-	printf ( "Loaded.\n" );
+	printf ( "World created.\n" );
 }

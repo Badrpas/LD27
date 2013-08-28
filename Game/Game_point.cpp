@@ -23,11 +23,17 @@ CPoint::CPoint( float32 x, float32 y, CPointType type_ ) {
 	_bodyFixture.restitution = 1.0f;
 	_bodyFixture.isSensor = true;
 	body->CreateFixture(&_bodyFixture);
-	points.push_back( this );
+	points.push_back( this );/*
 	ObjectPointer *p;
 	p = new ObjectPointer();
 	p->pointer	= this;
 	p->type		= O_POINT;
+	body->SetUserData( p );*/
+	
+	ObjectPointer* p = new ObjectPointer;
+	p->type = O_POINT;
+	p->pointer = this;
+
 	body->SetUserData( p );
 }
 

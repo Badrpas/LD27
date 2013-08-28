@@ -1,14 +1,12 @@
 #include "Game_refs.h"
 
 BBlock::BBlock ( float x_, float y_ ) {
-	printf("1\n");
-	color = (GLdouble*) malloc ( sizeof(float32) * 4 );
+	color = (GLdouble*) malloc ( sizeof(float32) * 10 );
 	color[0] = 1.0;
 	color[1] = 1.0;
 	color[2] = 1.0;
 	color[3] = 1.0;
 	
-	printf("2\n");
 	texture = blockTexture;
 	float halfWidth  = ptom ( BLOCK_SIZE / 2.0f );
 	float halfHeight = ptom ( BLOCK_SIZE / 2.0f );
@@ -17,34 +15,19 @@ BBlock::BBlock ( float x_, float y_ ) {
 	b2PolygonShape	_bodyShape;
 	b2FixtureDef	_bodyFixture;
 	
-	printf("3\n");
-
 	_bodyDef.angle			= 0;
 	_bodyDef.userData		= NULL;
 	_bodyDef.position.Set	( x_ / 100.0f, (SCREEN_HEIGHT - y_) / 100.0f );
 	_bodyShape.SetAsBox		( halfWidth, halfHeight );
 	
-	printf("4\n");
-
 	body = world->CreateBody( &_bodyDef );
 	_bodyFixture.shape		= &_bodyShape;
-	_bodyFixture.density	= 0.5f;
+	_bodyFixture.density	= 0.99f;
 	_bodyFixture.friction	= 0.0f;
 	_bodyFixture.restitution= 0.0f;
 	body->CreateFixture( &_bodyFixture );
 
-	
-	printf("5\n");
 	blocks.push_back( this );
-
-	
-	printf("6\n");
-	ObjectPointer *p;
-	p = new ObjectPointer();
-	p->pointer = this;
-	body->SetUserData( p );
-	
-	printf("7\n");
 }
 
 void BBlock::Update() {

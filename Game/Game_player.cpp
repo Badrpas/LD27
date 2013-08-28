@@ -1,7 +1,7 @@
 #include "Game_refs.h"
 
-float32 runAnimationTimer = 0;
-float32 runAnimationTimerDelay = 0.05;
+double runAnimationTimer = 0;
+double runAnimationTimerDelay = 0.05;
 
 Player::Player( float x, float y ) {
 	state			= STAND;
@@ -189,6 +189,9 @@ void Player::Update() {
 			timeToControl = 0.5;
 			desiredVel = 5;
 		}
+	}
+	if( (state == RUN) && ( keyPressed(SDLK_RIGHT) && keyPressed(SDLK_LEFT ) ) ) {
+		state = STAND;
 	}
 	
 	CAMERA_SHIFT_X = mtop(body->GetPosition().x) - SCREEN_WIDTH / 2 / SCALE_IMAGE;

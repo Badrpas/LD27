@@ -3,10 +3,13 @@
 
 enum ObjectPointerType { O_BLOCK, O_POINT };
 
-struct ObjectPointer {
-	void * pointer;
-	ObjectPointerType type;
-	ObjectPointer() ;
+class ObjectPointer {
+public:
+						ObjectPointer		();
+	ObjectPointerType	type;
+	void*				pointer;
+private:
+	bool				shit;
 };
 
 

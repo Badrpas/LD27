@@ -1,3 +1,5 @@
+//#undef _DEBUG
+//#define _ITERATOR_DEBUG_LEVEL 0
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_opengl.h>

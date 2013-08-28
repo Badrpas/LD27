@@ -5,5 +5,7 @@ struct BHint {
 	GLuint	texture;
 };
 
+// Володя Кунцевич
+// Никиор (Анатолиевич) главрач
 
 #endif _HINT_
