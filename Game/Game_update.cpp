@@ -6,7 +6,7 @@ void considerKeys();
 
 
 void update(){
-	considerKeys();	
+	considerKeys();
 	world->Step(dt, 10, 8);
 	timeLeft -= dt;
 	for ( Uint i = 0; i < blocks.size(); i++ )

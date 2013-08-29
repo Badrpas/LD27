@@ -12,7 +12,12 @@ int main ( int argc, char * argv[] ) {
 		printf( "\tLoop start {\n " );
 		Uint32 timePre = time;
 		time = SDL_GetTicks();
-		dt = ((double)( time - timePre )) / 1000.0;
+		long dtl = ( time - timePre );
+		dt = ( (double) dtl ) / 1000.0;
+		if ( dt < 1.0/58.0 ) {
+			SDL_Delay( (Uint32)(((1.0/58.0)- dt)*1000) );
+			dt = 1.0/58.0;
+		}
 		printf( "\tEvents\n " );
 		pollEvent();
 		printf( "\tUpdate\n " );
