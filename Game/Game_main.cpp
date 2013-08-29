@@ -18,11 +18,12 @@ int main ( int argc, char * argv[] ) {
 			SDL_Delay( (Uint32)(((1.0/58.0)- dt)*1000) );
 			dt = 1.0/58.0;
 		}
+	
 		printf( "\tEvents\n " );
 		pollEvent();
 		printf( "\tUpdate\n " );
 		update();
-		printf( "\tRender\n " );
+		printf( "%i\tRender\n ", (int)(1/dt) );
 		render();
 		printf( "%i\t} Loop end\n ", iterator++ );
 		

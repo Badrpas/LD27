@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="30" tilewidth="64" tileheight="64">
+ <tileset firstgid="1" source="blocks.tsx"/>
+ <tileset firstgid="2" source="man.tsx"/>
+ <tileset firstgid="3" source="free.tsx"/>
+ <tileset firstgid="4" source="finish.tsx"/>
+ <layer name="Слой тайлов 1" width="100" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztWssSwyAINE3//5t7TRxAQNDVujMeEg2QXUD7uEop1xlQ4wADmXrcSXZ3RpYeXP2denyjzlmOn8geOLsXow+tHihAiiUaRw8sePSI6vlRNb0TZunxD7x6cmmGHjto4a3h+j51nqL8SHaizxAoGPEOGecrVD6fQM0TqW443mefr6TP8UjcepCth+Y7EO0+tjLPWkTqYe15Gi5X55eDhYNbmPPkIKWHFOMO8NSxNn+pOWts0nWv/VEYsfej6eH1YYWV296YtL8lIOrh9fN8DmXft8aBoIdlP0HgObKmovSw+NXo0auxF6P7FuWfikeKsbWestvySa2xvKcm71bpW9Q66dnW+sLc4+Ys/clic8W+hawH5duSVz2Y1bfQ9dDCWnMofYuKr77eTQ8EnrWIqmvJ7rfhc4QeqyBbDyovM/TYBSPqg+P/ExSDB6j/fWxx0Yrbew45I2/8ANwHA14=
+  </data>
+ </layer>
+</map>
