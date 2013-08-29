@@ -2,10 +2,10 @@
 //#define _ITERATOR_DEBUG_LEVEL 0
 #pragma warning( disable : 4244 )
 
-#include <SDL.h> 
-#include <SDL_image.h>
-#include <SDL_opengl.h>
-#include <Box2D.h>
+#include "INCLUDES\SDL.h"
+#include "INCLUDES\SDL_image.h"
+#include "INCLUDES\SDL_opengl.h"
+#include "INCLUDES\Box2D.h"
 
 #define _USE_MATH_DEFINES
 #include <math.h>
